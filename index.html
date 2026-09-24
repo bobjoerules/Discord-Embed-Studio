@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discord Embed Studio - Customizer & Simulator</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
+
+  <!-- Open Graph Meta Tags (Fallback) -->
+  <meta property="og:site_name" content="Discord Embed Studio" />
+  <meta property="og:title" content="Discord Embed Studio — Visual Builder & Live Simulator" />
+  <meta property="og:description" content="Design native Discord website previews with clickable link buttons, media galleries, rich markdown, and custom accent colors. Includes a real-time Discord chat simulator and instant HTML code export." />
+  <meta property="og:url" content="https://bobjoerules.com" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#5865F2" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&h=630&fit=crop" />
+
+  <!-- Discord Component Embed Payload -->
+  <script id="discord:component-embed" type="application/json">
+  {
+    "component": {
+      "type": 17,
+      "accent_color": 5793266,
+      "components": [
+        {
+          "type": 9,
+          "components": [
+            {
+              "type": 10,
+              "content": "# 🚀 **[Discord Embed Studio](https://bobjoerules.com)**\nInteractive visual builder & simulator for website link previews in Discord."
+            }
+          ],
+          "accessory": {
+            "type": 2,
+            "style": 5,
+            "url": "https://bobjoerules.com",
+            "label": "Open Studio"
+          }
+        },
+        {
+          "type": 14
+        },
+        {
+          "type": 10,
+          "content": "### ✨ What this tool does:\n- 🔘 **Native Link Buttons** — Add clickable action buttons directly in chat\n- 🖼️ **Media Galleries** — Showcase image grids without Discord bots\n- ⚡ **1-Click Starter Templates** — Profiles, socials, release notes & tools\n- 💬 **Live Chat Simulator** — Real-time dark-theme preview as you customize\n- 📋 **Instant Code Export** — Copy & drop ready-to-use HTML into your `<head>`"
+        },
+        {
+          "type": 14
+        },
+        {
+          "type": 1,
+          "components": [
+            {
+              "type": 2,
+              "style": 5,
+              "url": "https://bobjoerules.com",
+              "label": "Launch Studio"
+            },
+            {
+              "type": 2,
+              "style": 5,
+              "url": "https://github.com/bobjoerules",
+              "label": "GitHub Profile"
+            }
+          ]
+        },
+        {
+          "type": 10,
+          "content": "-# 🛠️ Free, open-source tool by @bobjoerules · Powered by Discord Components V2"
+        }
+      ]
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="logo-area">
+      <svg viewBox="0 0 127.14 96.36">
+        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.91,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.91,96.12,53,91.08,65.69,84.69,65.69Z"/>
+      </svg>
+      <h1>Discord Embed Studio</h1>
+    </div>
+
+    <div class="header-links">
+      <a href="example.html" target="_blank">📄 Minimal Example HTML</a>
+      <a href="guide.html" target="_blank">📖 Full Documentation</a>
+      <a href="https://discord.com/developers/embeds" target="_blank">🛠️ Embed Debugger ↗</a>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <!-- Left Configuration Panel -->
+    <aside class="control-panel">
+      <!-- Tabs -->
+      <div class="tabs">
+        <button id="tab-component" class="tab-btn active">
+          🚀 Component Embed
+        </button>
+        <button id="tab-og" class="tab-btn">
+          🏷️ Standard Open Graph
+        </button>
+      </div>
+
+      <!-- Component Embed Dynamic Builder -->
+      <div id="component-controls">
+        <!-- Quick Presets -->
+        <div class="preset-container">
+          <div class="preset-title">⚡ 1-Click Starter Templates</div>
+          <div class="preset-grid">
+            <button type="button" class="preset-btn active" id="preset-profile">
+              <span>👤</span> Profile Card
+            </button>
+            <button type="button" class="preset-btn" id="preset-socials">
+              <span>🌐</span> Socials
+            </button>
+            <button type="button" class="preset-btn" id="preset-tool">
+              <span>🛠️</span> Tool Portal
+            </button>
+            <button type="button" class="preset-btn" id="preset-release">
+              <span>🚀</span> Announcement
+            </button>
+            <button type="button" class="preset-btn" id="preset-clear" style="color: var(--discord-red); grid-column: 1 / -1; justify-content: center;">
+              <span>🗑️</span> Clear All
+            </button>
+          </div>
+        </div>
+        <!-- Container Settings -->
+        <div class="panel-section">
+          <div class="panel-title">Container Settings (type: 17)</div>
+          <div class="form-group">
+            <label for="comp-url">Destination URL (Page Canonical)</label>
+            <input type="url" id="comp-url" value="https://example.com/project" placeholder="https://..." />
+          </div>
+          <div class="form-group">
+            <label>Accent Color (Hex)</label>
+            <div class="color-picker-row">
+              <input type="color" id="comp-color" value="#5865F2" class="color-swatch-input" />
+              <input type="text" id="comp-color-hex" value="#5865F2" style="max-width: 120px;" />
+            </div>
+            <div class="color-presets">
+              <div class="preset-chip" style="background:#5865F2;" data-color="#5865F2" title="Blurple"></div>
+              <div class="preset-chip" style="background:#F23F43;" data-color="#F23F43" title="Red"></div>
+              <div class="preset-chip" style="background:#23A55A;" data-color="#23A55A" title="Green"></div>
+              <div class="preset-chip" style="background:#F0B232;" data-color="#F0B232" title="Yellow"></div>
+              <div class="preset-chip" style="background:#EB459E;" data-color="#EB459E" title="Fuchsia"></div>
+              <div class="preset-chip" style="background:#2B2D31;" data-color="#2B2D31" title="Dark Slate"></div>
+              <div class="preset-chip" style="background:#000000;" data-color="#000000" title="Black"></div>
+              <div class="preset-chip" style="background:#FFFFFF;" data-color="#FFFFFF" title="White"></div>
+            </div>
+          </div>
+          <div class="toggle-group">
+            <span class="toggle-label">Spoiler Container (Hides preview)</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="comp-spoiler" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Add Component Toolbar -->
+        <div class="add-comp-container">
+          <div class="add-comp-title">
+            <span>➕ Add New Component</span>
+            <span style="font-size: 0.7rem; color: var(--discord-text-muted);" id="comp-count-badge">0 / 40</span>
+          </div>
+          <div class="add-comp-buttons">
+            <button type="button" class="btn-add-comp" id="btn-add-section-thumb">
+              <span>🖼️</span> Section + Thumbnail
+            </button>
+            <button type="button" class="btn-add-comp" id="btn-add-section-btn">
+              <span>🔘</span> Section + Button
+            </button>
+            <button type="button" class="btn-add-comp" id="btn-add-text">
+              <span>📝</span> Text Display
+            </button>
+            <button type="button" class="btn-add-comp" id="btn-add-action-row">
+              <span>🔗</span> Button Row
+            </button>
+            <button type="button" class="btn-add-comp" id="btn-add-separator">
+              <span>➖</span> Separator
+            </button>
+            <button type="button" class="btn-add-comp" id="btn-add-gallery">
+              <span>📷</span> Media Gallery
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Components List -->
+        <div class="panel-title" style="margin-bottom: 0.5rem;">Embed Components (In Render Order)</div>
+        <div id="components-list" class="components-builder-list">
+          <!-- Dynamically injected components cards -->
+        </div>
+      </div>
+
+      <!-- Classic Open Graph Form Controls -->
+      <div id="og-controls" style="display: none;">
+        <div class="panel-section">
+          <div class="panel-title">Open Graph Metadata</div>
+          <div class="form-group">
+            <label for="og-sitename">Site Name (og:site_name)</label>
+            <input type="text" id="og-sitename" value="Developer Portal" />
+          </div>
+          <div class="form-group">
+            <label for="og-title">Title (og:title)</label>
+            <input type="text" id="og-title" value="Getting Started with Modern Web Development" />
+          </div>
+          <div class="form-group">
+            <label for="og-desc">Description (og:description)</label>
+            <textarea id="og-desc" rows="3">A comprehensive guide to styling, components, and Discord embeds.</textarea>
+          </div>
+          <div class="form-group">
+            <label for="og-image">Image URL (og:image)</label>
+            <input type="url" id="og-image" value="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&h=630&fit=crop" />
+          </div>
+          <div class="form-group">
+            <label for="og-card-type">Card Size (twitter:card)</label>
+            <select id="og-card-type">
+              <option value="summary_large_image">Large Image (summary_large_image)</option>
+              <option value="summary">Small Thumbnail (summary)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Theme Color (theme-color)</label>
+            <div class="color-picker-row">
+              <input type="color" id="og-color" value="#5865F2" class="color-swatch-input" />
+              <input type="text" id="og-color-hex" value="#5865F2" style="max-width: 120px;" />
+            </div>
+            <div class="color-presets">
+              <div class="preset-chip" style="background:#5865F2;" data-color="#5865F2" title="Blurple"></div>
+              <div class="preset-chip" style="background:#F23F43;" data-color="#F23F43" title="Red"></div>
+              <div class="preset-chip" style="background:#23A55A;" data-color="#23A55A" title="Green"></div>
+              <div class="preset-chip" style="background:#F0B232;" data-color="#F0B232" title="Yellow"></div>
+              <div class="preset-chip" style="background:#EB459E;" data-color="#EB459E" title="Fuchsia"></div>
+              <div class="preset-chip" style="background:#2B2D31;" data-color="#2B2D31" title="Dark Slate"></div>
+              <div class="preset-chip" style="background:#000000;" data-color="#000000" title="Black"></div>
+              <div class="preset-chip" style="background:#FFFFFF;" data-color="#FFFFFF" title="White"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Live Preview and Code Area -->
+    <main class="preview-area">
+      <!-- Discord Chat Message Simulation -->
+      <div class="preview-container">
+        <div class="chat-message">
+          <div class="user-avatar" id="msg-avatar">
+            <img src="https://github.com/bobjoerules.png" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;" />
+          </div>
+          <div class="message-body">
+            <div class="message-header">
+              <span class="user-name" id="msg-username">bobjoerules</span>
+              <span class="message-time">Today at 12:00 PM</span>
+            </div>
+            <div class="message-text">
+              <a href="#" id="msg-link">https://example.com/project</a>
+            </div>
+
+            <!-- Discord Embed Simulator Card -->
+            <div class="discord-embed-card" id="discord-embed-card">
+              <!-- Dynamically populated by app.js based on added components -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Generated Code Box -->
+      <div class="code-output-card">
+        <div class="code-header">
+          <span class="code-header-title">📋 Drop this inside your &lt;head&gt; tag:</span>
+          <button class="copy-btn" id="copy-code-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+            </svg>
+            Copy HTML
+          </button>
+        </div>
+        <pre class="code-block"><code id="generated-code"></code></pre>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast">✅ HTML copied to clipboard!</div>
+
+  <script src="app.js"></script>
+</body>
+</html>

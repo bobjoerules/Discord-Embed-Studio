@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discord Embed Guide & Documentation</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Discord Embed Studio" />
+  <meta property="og:title" content="The Ultimate Guide to Customizing Website Embeds in Discord" />
+  <meta property="og:description" content="Complete documentation for Discord Component Embeds, Open Graph tags, buttons, galleries, and cache debugging." />
+  <meta property="og:url" content="https://bobjoerules.com" />
+  <meta name="theme-color" content="#5865F2" />
+
+  <!-- Marked & Highlight.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #1e1f22;
+      --content-bg: #313338;
+      --sidebar-bg: #2b2d31;
+      --card-bg: #111214;
+      --border: #3f4147;
+      --blurple: #5865F2;
+      --blurple-hover: #4752C4;
+      --text: #dbdee1;
+      --text-header: #ffffff;
+      --text-muted: #949ba4;
+      --font-main: "gg sans", "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-code: "Consolas", "Courier New", Courier, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--sidebar-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-header);
+    }
+
+    .header-logo svg {
+      width: 36px;
+      height: 36px;
+      fill: var(--blurple);
+    }
+
+    .header-logo h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .header-logo .badge {
+      background: rgba(88, 101, 242, 0.2);
+      border: 1px solid var(--blurple);
+      color: #a5b4fc;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .header-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.45rem 0.85rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .header-nav a:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+
+    .header-nav a.btn-primary {
+      background: var(--blurple);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .header-nav a.btn-primary:hover {
+      background: var(--blurple-hover);
+    }
+
+    .docs-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      flex: 1;
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 900px) {
+      .docs-layout { grid-template-columns: 1fr; }
+      .docs-sidebar { display: none; }
+    }
+
+    .docs-sidebar {
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem;
+      position: sticky;
+      top: 69px;
+      height: calc(100vh - 69px);
+      overflow-y: auto;
+    }
+
+    .sidebar-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .toc-item a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: block;
+      padding: 0.35rem 0.6rem;
+      border-radius: 4px;
+      transition: all 0.15s;
+      line-height: 1.3;
+    }
+
+    .toc-item a:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .toc-item.sub {
+      padding-left: 0.85rem;
+      font-size: 0.8rem;
+    }
+
+    .toc-item a.active {
+      color: #fff;
+      background: rgba(88, 101, 242, 0.2);
+      border-left: 2px solid var(--blurple);
+      font-weight: 600;
+    }
+
+    .docs-main {
+      background: var(--content-bg);
+      padding: 2.5rem 3.5rem 6rem 3.5rem;
+      max-width: 960px;
+      overflow-x: hidden;
+    }
+
+    @media (max-width: 600px) {
+      .docs-main { padding: 1.5rem 1rem 4rem 1rem; }
+    }
+
+    /* Markdown Styling */
+    .markdown-body h1 {
+      font-size: 2.1rem;
+      color: var(--text-header);
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+      line-height: 1.25;
+    }
+
+    .markdown-body h2 {
+      font-size: 1.45rem;
+      color: var(--text-header);
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+      scroll-margin-top: 80px;
+    }
+
+    .markdown-body h3 {
+      font-size: 1.15rem;
+      color: #f2f3f5;
+      margin-top: 1.75rem;
+      margin-bottom: 0.75rem;
+      scroll-margin-top: 80px;
+    }
+
+    .markdown-body p {
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .markdown-body a {
+      color: #00a8fc;
+      text-decoration: none;
+    }
+
+    .markdown-body a:hover {
+      text-decoration: underline;
+    }
+
+    .markdown-body ul, .markdown-body ol {
+      margin-bottom: 1.25rem;
+      padding-left: 1.75rem;
+    }
+
+    .markdown-body li {
+      margin-bottom: 0.4rem;
+    }
+
+    .markdown-body hr {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 2rem 0;
+    }
+
+    .markdown-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--sidebar-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .markdown-body th {
+      background: #1e1f22;
+      color: #ffffff;
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-size: 0.85rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .markdown-body td {
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+
+    .markdown-body tr:last-child td {
+      border-bottom: none;
+    }
+
+    .markdown-body tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .markdown-body blockquote {
+      border-left: 4px solid var(--blurple);
+      background: rgba(88, 101, 242, 0.1);
+      padding: 0.75rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.25rem 0;
+      color: #e0e2e5;
+    }
+
+    .markdown-body blockquote p:last-child {
+      margin-bottom: 0;
+    }
+
+    .markdown-body code {
+      font-family: var(--font-code);
+      background: var(--card-bg);
+      color: #38bdf8;
+      padding: 0.2rem 0.45rem;
+      border-radius: 4px;
+      font-size: 0.88em;
+    }
+
+    .code-container {
+      position: relative;
+      margin: 1.25rem 0;
+      background: #111214;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .code-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #18191c;
+      padding: 0.4rem 0.85rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .code-copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .code-copy-btn:hover {
+      background: var(--blurple);
+      border-color: var(--blurple);
+      color: #fff;
+    }
+
+    .code-container pre {
+      margin: 0;
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+    }
+
+    .code-container code {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+      font-size: 0.85rem;
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.24); }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="header-logo">
+      <svg viewBox="0 0 127.14 96.36">
+        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.91,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.91,96.12,53,91.08,65.69,84.69,65.69Z"/>
+      </svg>
+      <h1>Discord Embed Studio</h1>
+      <span class="badge">Documentation</span>
+    </a>
+
+    <nav class="header-nav">
+      <a href="index.html" class="btn-primary">← Studio Builder</a>
+      <a href="example.html" target="_blank">📄 Minimal Example</a>
+      <a href="discord_embed_guide.md" target="_blank">Raw .md ↗</a>
+      <a href="https://discord.com/developers/embeds" target="_blank">Embed Debugger ↗</a>
+    </nav>
+  </header>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar">
+      <div class="sidebar-title">Table of Contents</div>
+      <ul class="toc-list" id="toc-list">
+        <!-- Dynamically generated from headings -->
+      </ul>
+    </aside>
+
+    <main class="docs-main">
+      <div id="content" class="markdown-body">
+        <p style="color: var(--text-muted);">Loading documentation...</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const contentEl = document.getElementById("content");
+      const tocList = document.getElementById("toc-list");
+
+      function slugify(text) {
+        return text
+          .toLowerCase()
+          .replace(/[^\w\s-]/g, "")
+          .trim()
+          .replace(/\s+/g, "-");
+      }
+
+      function buildTableOfContents() {
+        tocList.innerHTML = "";
+        const headings = contentEl.querySelectorAll("h2, h3");
+
+        headings.forEach((heading) => {
+          const rawTitle = heading.innerText.trim();
+          if (rawTitle.toLowerCase().includes("table of contents")) return;
+
+          let id = heading.id;
+          if (!id) {
+            id = slugify(rawTitle);
+            heading.id = id;
+          }
+
+          const li = document.createElement("li");
+          li.className = "toc-item" + (heading.tagName === "H3" ? " sub" : "");
+          const a = document.createElement("a");
+          a.href = "#" + id;
+          a.textContent = rawTitle.replace(/^[0-9]+\.\s*/, "");
+          li.appendChild(a);
+          tocList.appendChild(li);
+        });
+
+        // Scroll spy
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.id;
+              document.querySelectorAll(".toc-item a").forEach((a) => {
+                a.classList.toggle("active", a.getAttribute("href") === "#" + id);
+              });
+            }
+          });
+        }, { rootMargin: "0px 0px -70% 0px" });
+
+        headings.forEach((h) => observer.observe(h));
+      }
+
+      function enhanceCodeBlocks() {
+        contentEl.querySelectorAll("pre code").forEach((codeEl) => {
+          hljs.highlightElement(codeEl);
+
+          const pre = codeEl.parentElement;
+          const container = document.createElement("div");
+          container.className = "code-container";
+
+          const topbar = document.createElement("div");
+          topbar.className = "code-topbar";
+
+          // Detect language
+          let lang = "CODE";
+          codeEl.classList.forEach((cls) => {
+            if (cls.startsWith("language-")) lang = cls.replace("language-", "").toUpperCase();
+          });
+          topbar.innerHTML = `<span>${lang}</span>`;
+
+          const copyBtn = document.createElement("button");
+          copyBtn.className = "code-copy-btn";
+          copyBtn.textContent = "Copy";
+          copyBtn.addEventListener("click", () => {
+            navigator.clipboard.writeText(codeEl.textContent).then(() => {
+              copyBtn.textContent = "✓ Copied!";
+              setTimeout(() => { copyBtn.textContent = "Copy"; }, 2000);
+            });
+          });
+
+          topbar.appendChild(copyBtn);
+          pre.parentNode.insertBefore(container, pre);
+          container.appendChild(topbar);
+          container.appendChild(pre);
+        });
+      }
+
+      function renderMarkdown(rawMd) {
+        if (typeof marked !== "undefined") {
+          contentEl.innerHTML = marked.parse(rawMd);
+          enhanceCodeBlocks();
+          buildTableOfContents();
+        } else {
+          contentEl.innerHTML = `<pre style="white-space: pre-wrap;">${rawMd}</pre>`;
+        }
+      }
+
+      // Fetch fresh markdown from file
+      fetch("discord_embed_guide.md")
+        .then(res => {
+          if (!res.ok) throw new Error("Fetch failed");
+          return res.text();
+        })
+        .then(text => renderMarkdown(text))
+        .catch(err => {
+          contentEl.innerHTML = `
+            <h2>Failed to load documentation file</h2>
+            <p>Could not fetch <code>discord_embed_guide.md</code>.</p>
+            <p><a href="discord_embed_guide.md">Click here to view raw file directly</a></p>
+          `;
+        });
+    });
+  </script>
+</body>
+</html>
