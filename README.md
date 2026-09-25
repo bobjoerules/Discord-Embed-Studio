@@ -86,7 +86,7 @@ To enable this on any web page:
 ├── index.html               # Main interactive visual builder & live simulator
 ├── guide.html               # Full documentation browser with live Markdown viewer
 ├── example.html             # Standalone production-ready embed HTML template
-├── discord_embed_guide.md   # Comprehensive Discord Component Embed documentation
+├── guide.md                 # Comprehensive Discord Component Embed documentation
 ├── style.css                # Discord dark-theme UI design system & responsive layout
 ├── app.js                   # State management, component builder, simulator & code exporter
 ├── icon.png                 # High-resolution 512x512 embed thumbnail accessory
