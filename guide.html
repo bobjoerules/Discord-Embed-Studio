@@ -42,9 +42,8 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html, body {
-      overflow-x: hidden;
-      max-width: 100vw;
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -55,6 +54,20 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+    }
+
+    /* Reading Progress Bar on Desktop */
+    .reading-progress-bar {
+      position: fixed;
+      top: 69px;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blurple), #38bdf8);
+      width: 0%;
+      z-index: 101;
+      transition: width 0.1s ease-out;
+      pointer-events: none;
+      box-shadow: 0 0 8px rgba(88, 101, 242, 0.6);
     }
 
     header {
@@ -75,6 +88,11 @@
       gap: 0.75rem;
       text-decoration: none;
       color: var(--text-header);
+      transition: transform 0.2s ease;
+    }
+
+    .header-logo:hover {
+      transform: translateY(-1px);
     }
 
     .header-logo svg {
@@ -111,12 +129,13 @@
       font-weight: 500;
       padding: 0.45rem 0.85rem;
       border-radius: 4px;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
     }
 
     .header-nav a:hover {
       background: rgba(255, 255, 255, 0.05);
       color: #fff;
+      transform: translateY(-1px);
     }
 
     .header-nav a.btn-primary {
@@ -136,14 +155,20 @@
       max-width: 1440px;
       width: 100%;
       margin: 0 auto;
+      align-items: start;
     }
 
     @media (max-width: 900px) {
       .docs-layout { grid-template-columns: 1fr; }
       .docs-sidebar { display: none; }
+      .reading-progress-bar { display: none; }
     }
 
     @media (max-width: 768px) {
+      html, body {
+        overflow-x: clip;
+        max-width: 100vw;
+      }
       header {
         padding: 0.75rem 1rem;
         flex-direction: column;
@@ -170,11 +195,12 @@
     .docs-sidebar {
       background: var(--sidebar-bg);
       border-right: 1px solid var(--border);
-      padding: 1.5rem;
+      padding: 1.5rem 1.25rem;
       position: sticky;
       top: 69px;
       height: calc(100vh - 69px);
       overflow-y: auto;
+      scrollbar-gutter: stable;
     }
 
     .sidebar-title {
@@ -184,6 +210,7 @@
       font-weight: 700;
       color: var(--text-muted);
       margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
     }
 
     .toc-list {
@@ -198,15 +225,18 @@
       text-decoration: none;
       font-size: 0.85rem;
       display: block;
-      padding: 0.35rem 0.6rem;
-      border-radius: 4px;
-      transition: all 0.15s;
-      line-height: 1.3;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      line-height: 1.35;
+      position: relative;
+      border-left: 3px solid transparent;
     }
 
     .toc-item a:hover {
       color: #fff;
       background: rgba(255, 255, 255, 0.05);
+      padding-left: 0.95rem;
     }
 
     .toc-item.sub {
@@ -215,17 +245,20 @@
     }
 
     .toc-item a.active {
-      color: #fff;
-      background: rgba(88, 101, 242, 0.2);
-      border-left: 2px solid var(--blurple);
+      color: #ffffff;
+      background: rgba(88, 101, 242, 0.18);
+      border-left: 3px solid var(--blurple);
       font-weight: 600;
+      padding-left: 0.95rem;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     }
 
     .docs-main {
       background: var(--content-bg);
       padding: 2.5rem 3.5rem 6rem 3.5rem;
       max-width: 960px;
-      overflow-x: hidden;
+      min-width: 0;
+      overflow-x: clip;
     }
 
     @media (max-width: 600px) {
@@ -233,6 +266,17 @@
     }
 
     /* Markdown Styling */
+    .markdown-body {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.35s ease-out, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .markdown-body.loaded {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .markdown-body h1 {
       font-size: 2.1rem;
       color: var(--text-header);
@@ -249,7 +293,7 @@
       margin-bottom: 1rem;
       border-bottom: 1px solid var(--border);
       padding-bottom: 0.4rem;
-      scroll-margin-top: 80px;
+      scroll-margin-top: 85px;
     }
 
     .markdown-body h3 {
@@ -257,7 +301,7 @@
       color: #f2f3f5;
       margin-top: 1.75rem;
       margin-bottom: 0.75rem;
-      scroll-margin-top: 80px;
+      scroll-margin-top: 85px;
     }
 
     .markdown-body p {
@@ -378,16 +422,24 @@
       border: 1px solid var(--border);
       color: var(--text-muted);
       font-size: 0.75rem;
-      padding: 0.2rem 0.55rem;
+      padding: 0.2rem 0.6rem;
       border-radius: 4px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .code-copy-btn:hover {
       background: var(--blurple);
       border-color: var(--blurple);
       color: #fff;
+      transform: scale(1.05);
+    }
+
+    .code-copy-btn.copied {
+      background: #23a55a;
+      border-color: #23a55a;
+      color: #fff;
+      transform: scale(1.05);
     }
 
     .code-container pre {
@@ -430,6 +482,8 @@
     </nav>
   </header>
 
+  <div id="reading-progress" class="reading-progress-bar"></div>
+
   <div class="docs-layout">
     <aside class="docs-sidebar">
       <div class="sidebar-title">Table of Contents</div>
@@ -449,6 +503,7 @@
     document.addEventListener("DOMContentLoaded", () => {
       const contentEl = document.getElementById("content");
       const tocList = document.getElementById("toc-list");
+      const progressBar = document.getElementById("reading-progress");
 
       function slugify(text) {
         return text
@@ -477,23 +532,70 @@
           const a = document.createElement("a");
           a.href = "#" + id;
           a.textContent = rawTitle.replace(/^[0-9]+\.\s*/, "");
+
+          // Smooth scrolling on click with header offset
+          a.addEventListener("click", (e) => {
+            e.preventDefault();
+            const target = document.getElementById(id);
+            if (target) {
+              const targetY = target.getBoundingClientRect().top + window.pageYOffset - 85;
+              window.scrollTo({
+                top: targetY,
+                behavior: "smooth"
+              });
+              history.pushState(null, "", "#" + id);
+            }
+          });
+
           li.appendChild(a);
           tocList.appendChild(li);
         });
 
-        // Scroll spy
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const id = entry.target.id;
-              document.querySelectorAll(".toc-item a").forEach((a) => {
-                a.classList.toggle("active", a.getAttribute("href") === "#" + id);
-              });
-            }
-          });
-        }, { rootMargin: "0px 0px -70% 0px" });
+        // Continuous real-time scroll spy
+        function updateScrollSpy() {
+          const headingList = Array.from(contentEl.querySelectorAll("h2, h3"));
+          if (!headingList.length) return;
 
-        headings.forEach((h) => observer.observe(h));
+          const scrollPos = window.scrollY + 100;
+          let currentHeading = headingList[0];
+
+          for (let i = 0; i < headingList.length; i++) {
+            if (headingList[i].offsetTop <= scrollPos) {
+              currentHeading = headingList[i];
+            } else {
+              break;
+            }
+          }
+
+          if (currentHeading && currentHeading.id) {
+            const activeId = currentHeading.id;
+            document.querySelectorAll(".toc-item a").forEach((a) => {
+              const isActive = a.getAttribute("href") === "#" + activeId;
+              a.classList.toggle("active", isActive);
+              if (isActive) {
+                const sidebar = document.querySelector(".docs-sidebar");
+                if (sidebar) {
+                  const itemTop = a.offsetTop;
+                  const sidebarScroll = sidebar.scrollTop;
+                  const sidebarHeight = sidebar.clientHeight;
+                  if (itemTop < sidebarScroll || itemTop > sidebarScroll + sidebarHeight - 70) {
+                    sidebar.scrollTo({ top: Math.max(0, itemTop - 100), behavior: "smooth" });
+                  }
+                }
+              }
+            });
+          }
+
+          // Update reading progress bar
+          if (progressBar) {
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+            progressBar.style.width = Math.min(100, Math.max(0, progress)) + "%";
+          }
+        }
+
+        window.addEventListener("scroll", updateScrollSpy, { passive: true });
+        updateScrollSpy();
       }
 
       function enhanceCodeBlocks() {
@@ -520,7 +622,11 @@
           copyBtn.addEventListener("click", () => {
             navigator.clipboard.writeText(codeEl.textContent).then(() => {
               copyBtn.textContent = "✓ Copied!";
-              setTimeout(() => { copyBtn.textContent = "Copy"; }, 2000);
+              copyBtn.classList.add("copied");
+              setTimeout(() => {
+                copyBtn.textContent = "Copy";
+                copyBtn.classList.remove("copied");
+              }, 2000);
             });
           });
 
@@ -536,8 +642,10 @@
           contentEl.innerHTML = marked.parse(rawMd);
           enhanceCodeBlocks();
           buildTableOfContents();
+          contentEl.classList.add("loaded");
         } else {
           contentEl.innerHTML = `<pre style="white-space: pre-wrap;">${rawMd}</pre>`;
+          contentEl.classList.add("loaded");
         }
       }
 
@@ -553,6 +661,7 @@
             <p>Could not load <code>guide.md</code> (${err.message}).</p>
             <p><a href="guide.md">Click here to view raw guide.md directly</a></p>
           `;
+          contentEl.classList.add("loaded");
         });
     });
   </script>
