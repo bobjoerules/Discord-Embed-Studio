@@ -1,4 +1,4 @@
-# 🚀 Discord Embed Studio
+# Discord Embed Studio
 
 > **Design native Discord website previews with clickable link buttons, media galleries, rich markdown, and custom accent colors.** Includes a real-time Discord chat simulator and instant HTML code export.
 
@@ -9,34 +9,34 @@
 [![JavaScript](https://img.shields.io/badge/Vanilla%20JS-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-🌐 **Live Website**: [https://discordembeds.bobjoerules.com/](https://discordembeds.bobjoerules.com/)  
-📖 **Full Documentation**: [https://discordembeds.bobjoerules.com/guide.html](https://discordembeds.bobjoerules.com/guide.html)
+**Live Website**: [https://discordembeds.bobjoerules.com/](https://discordembeds.bobjoerules.com/)  
+**Full Documentation**: [https://discordembeds.bobjoerules.com/guide.html](https://discordembeds.bobjoerules.com/guide.html)
 
 ---
 
-## ✨ Features
+## Features
 
-- **⚡ 1-Click Starter Templates**:
-  - **👤 Profile Card**: Showcase developer bios, stats, avatar thumbnails, and GitHub repo lists.
-  - **🌐 Socials**: Multi-platform creator bio linking personal site, YouTube, Twitch, Steam, Instagram, Threads, Bluesky, Letterboxd, and X.
-  - **🛠️ Tool Portal**: Utility hub featuring [AMLL TTML Tool](https://ttmleditor.com/) with web editor launch & desktop release buttons.
-  - **🚀 Announcement**: Major product release showcase with changelog bullets, image gallery, and documentation links.
-- **💬 Real-Time Discord Chat Simulator**:
+- **1-Click Starter Templates**:
+  - **Profile Card**: Showcase developer bios, stats, avatar thumbnails, and GitHub repo lists.
+  - **Socials**: Multi-platform creator bio linking personal site, YouTube, Twitch, Steam, Instagram, Threads, Bluesky, Letterboxd, and X.
+  - **Tool Portal**: Utility hub featuring [AMLL TTML Tool](https://ttmleditor.com/) with web editor launch and desktop release buttons.
+  - **Announcement**: Major product release showcase with changelog bullets, image gallery, and documentation links.
+- **Real-Time Discord Chat Simulator**:
   - Live 1:1 preview matching Discord's dark theme typography, channel layout, user avatars, markdown formatting, and component rendering.
-- **🎨 Accent Color Presets**:
+- **Accent Color Presets**:
   - Instant swatches for Discord Blurple, Red, Green, Yellow, Fuchsia, Dark Slate, Black, and White.
   - Automatic synchronization between hex codes and Discord's required decimal integer format (`accent_color`).
-- **🔄 Dual Builder Modes**:
+- **Dual Builder Modes**:
   - **Component Embeds (`type: 17`)**: Modern, interactive link buttons and layout structures embedded directly in HTML.
   - **Open Graph Fallback**: Standard `<meta property="og:...">` tags with `theme-color` and Twitter Card support.
-- **📖 Built-In Comprehensive Guide**:
+- **Built-In Comprehensive Guide**:
   - Complete, styled documentation browser (`guide.html`) detailing every component type, layout constraints, markdown quirks, and Open Graph requirements.
 
 ---
 
-## 🛠️ How It Works
+## How It Works
 
-Discord Component Embeds render rich preview cards for websites when shared in chat—**without requiring a Discord bot or server integration**.
+Discord Component Embeds render rich preview cards for websites when shared in chat without requiring a Discord bot or server integration.
 
 To enable this on any web page:
 1. Include standard Open Graph meta tags in `<head>` as a fallback.
@@ -80,7 +80,7 @@ To enable this on any web page:
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 ├── index.html               # Main interactive visual builder & live simulator
@@ -89,7 +89,7 @@ To enable this on any web page:
 ├── discord_embed_guide.md   # Comprehensive Discord Component Embed documentation
 ├── style.css                # Discord dark-theme UI design system & responsive layout
 ├── app.js                   # State management, component builder, simulator & code exporter
-├── icon.png                 # High-resolution 256x256 embed thumbnail accessory
+├── icon.png                 # High-resolution 512x512 embed thumbnail accessory
 ├── favicon.svg              # Scalable vector favicon
 ├── favicon.png              # High-resolution raster favicon
 └── favicon.ico              # Standard browser favicon
@@ -97,7 +97,7 @@ To enable this on any web page:
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 Simply open `index.html` in any modern web browser, or serve locally with any static file server:
 
@@ -109,11 +109,11 @@ python3 -m http.server 5500
 npx serve .
 ```
 
-Open `http://localhost:5500` to start building embeds!
+Open `http://localhost:5500` to start building embeds.
 
 ---
 
-## 👤 Author
+## Author
 
 **Miles Chase** ([@bobjoerules](https://github.com/bobjoerules))
 - Live Website: [discordembeds.bobjoerules.com](https://discordembeds.bobjoerules.com/)
@@ -122,6 +122,6 @@ Open `http://localhost:5500` to start building embeds!
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the [MIT License](LICENSE).
