@@ -2,11 +2,15 @@
 
 > **Design native Discord website previews with clickable link buttons, media galleries, rich markdown, and custom accent colors.** Includes a real-time Discord chat simulator and instant HTML code export.
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-discordembeds.bobjoerules.com-5865F2?logo=firefox&logoColor=white)](https://discordembeds.bobjoerules.com/)
 [![Discord](https://img.shields.io/badge/Discord-Component%20Embeds-5865F2?logo=discord&logoColor=white)](https://discord.com)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/Vanilla%20JS-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+🌐 **Live Website**: [https://discordembeds.bobjoerules.com/](https://discordembeds.bobjoerules.com/)  
+📖 **Full Documentation**: [https://discordembeds.bobjoerules.com/guide.html](https://discordembeds.bobjoerules.com/guide.html)
 
 ---
 
@@ -40,10 +44,10 @@ To enable this on any web page:
 
 ```html
 <!-- Open Graph Fallback -->
-<meta property="og:site_name" content="My Project" />
-<meta property="og:title" content="Project Title" />
-<meta property="og:description" content="Explore interactive features and documentation." />
-<meta property="og:url" content="https://example.com/project" />
+<meta property="og:site_name" content="Discord Embed Studio" />
+<meta property="og:title" content="Discord Embed Studio — Native Link Button & Media Builder" />
+<meta property="og:description" content="Design native Discord website previews with clickable link buttons, media galleries, rich markdown, and custom accent colors." />
+<meta property="og:url" content="https://discordembeds.bobjoerules.com/" />
 <meta name="theme-color" content="#5865F2" />
 
 <!-- Discord Component Embed Payload -->
@@ -58,14 +62,14 @@ To enable this on any web page:
         "components": [
           {
             "type": 10,
-            "content": "# **[Project Title](https://example.com/project)**\nExplore interactive features and documentation."
+            "content": "# **[Discord Embed Studio](https://discordembeds.bobjoerules.com/)**\nInteractive visual builder & live simulator for website previews in Discord."
           }
         ],
         "accessory": {
           "type": 2,
           "style": 5,
-          "label": "Visit Website",
-          "url": "https://example.com/project"
+          "label": "Open Studio",
+          "url": "https://discordembeds.bobjoerules.com/"
         }
       }
     ]
@@ -85,6 +89,7 @@ To enable this on any web page:
 ├── discord_embed_guide.md   # Comprehensive Discord Component Embed documentation
 ├── style.css                # Discord dark-theme UI design system & responsive layout
 ├── app.js                   # State management, component builder, simulator & code exporter
+├── icon.png                 # High-resolution 256x256 embed thumbnail accessory
 ├── favicon.svg              # Scalable vector favicon
 ├── favicon.png              # High-resolution raster favicon
 └── favicon.ico              # Standard browser favicon
@@ -111,7 +116,8 @@ Open `http://localhost:5500` to start building embeds!
 ## 👤 Author
 
 **Miles Chase** ([@bobjoerules](https://github.com/bobjoerules))
-- Website: [bobjoerules.com](https://bobjoerules.com)
+- Live Website: [discordembeds.bobjoerules.com](https://discordembeds.bobjoerules.com/)
+- Portfolio: [bobjoerules.com](https://bobjoerules.com)
 - GitHub: [@bobjoerules](https://github.com/bobjoerules)
 
 ---
